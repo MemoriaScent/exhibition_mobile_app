@@ -53,7 +53,9 @@ class _CartridgeManagementState extends State<CartridgeManagement> {
                   title: management.index(index).name,
                   onTap: () async {
                     final newData = await showCartridgeDialog(management.index(index));
-                    management.updateCartridge(index, newData);
+                    if (newData != null) {
+                      management.updateCartridge(index, newData);
+                    }
                     setState(() {});
                   },
                   onLongPress: () async {
@@ -84,7 +86,9 @@ class _CartridgeManagementState extends State<CartridgeManagement> {
                   title: management.index(index).name,
                   onTap: () async {
                     final newData = await showCartridgeDialog(management.index(index));
-                    management.updateCartridge(index, newData);
+                    if (newData != null) {
+                      management.updateCartridge(index, newData);
+                    }
                     setState(() {});
                   },
                   onLongPress: () async {
@@ -111,7 +115,9 @@ class _CartridgeManagementState extends State<CartridgeManagement> {
           final newData = CartridgeData();
           newData.name += " ${management.length()}";
           final data = await showCartridgeDialog(newData);
-          management.addCartridge(data);
+          if (data != null) {
+            management.addCartridge(data);
+          }
           setState(() {});
         },
         child: const Icon(Icons.add),
@@ -120,8 +126,10 @@ class _CartridgeManagementState extends State<CartridgeManagement> {
   }
 }
 
-Future<CartridgeData> showCartridgeDialog(CartridgeData data) async {
+Future<CartridgeData?> showCartridgeDialog(CartridgeData argData) async {
+  CartridgeData data = CartridgeData.fromJsonMap(argData.toJson());
   final formKey = GlobalKey<FormState>();
+  bool isConfirm = false;
 
   await Get.defaultDialog(
     title: "Cartridge",
@@ -189,16 +197,17 @@ Future<CartridgeData> showCartridgeDialog(CartridgeData data) async {
         ),
       );
     }),
-    textConfirm: "Confirm",
+    textConfirm: "확인",
     onConfirm: () {
       if (!formKey.currentState!.validate()) {
         return;
       }
       formKey.currentState!.save();
+      isConfirm = true;
       Get.back();
     },
-    textCancel: "Cancel",
+    textCancel: "취소",
   );
 
-  return data;
+  return isConfirm ? data : null;
 }
