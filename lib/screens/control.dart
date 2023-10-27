@@ -16,9 +16,6 @@ class _ControlScreenState extends State<ControlScreen> {
   final management = Get.find<CartridgeController>();
   double opacity = 0;
 
-  // TODO: 기조제: 최소 5개
-  // TODO: 첨가제(색 다르게)
-
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
