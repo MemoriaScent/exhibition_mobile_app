@@ -10,29 +10,31 @@ class CartridgeController extends GetxController {
 
   Future<void> load() async {
     final prefs = await SharedPreferences.getInstance();
-    var dataString = prefs.getString("data");
+    var dataString = prefs.getString("cartridge");
     if (dataString == null) {
       return;
     }
 
-    final decode = jsonDecode(dataString);
-    List<CartridgeData> d = decode is List<CartridgeData> ? decode : [];
+    final Map<String, dynamic> decode = jsonDecode(dataString);
 
     cartridges.update((instance) {
       instance?.data.clear();
-      for (CartridgeData i in d) {
-        instance?.data.add(i);
+      for (Map<String, dynamic> json in decode["data"]) {
+        instance?.data.add(CartridgeData.fromJsonMap(json));
       }
     });
   }
 
   Future<void> save() async {
     final prefs = await SharedPreferences.getInstance();
-    List<String> dumps = [];
+    Map<String, dynamic> encode = {};
+    encode["data"] = [];
+
     for (int index = 0; index < cartridges().data.length; index++) {
-      dumps.add(jsonEncode(cartridges().data[index]));
+      encode["data"].add(cartridges().data[index].toJson());
     }
-    await prefs.setStringList("data", dumps);
+
+    await prefs.setString("cartridge", jsonEncode(encode));
   }
 
   void reset() {
@@ -91,8 +93,8 @@ class CartridgeController extends GetxController {
 
     cartridges.update((instance) {
       CartridgeData temp = instance!.data[prev];
-      instance.data[prev] = instance.data[next];
-      instance.data[next] = temp;
+      instance.data.removeAt(prev);
+      instance.data.insert(next, temp);
     });
   }
 }
