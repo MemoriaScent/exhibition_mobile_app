@@ -85,8 +85,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   middleText: "Reset all settings",
                   textConfirm: "Confirm",
                   onConfirm: () {
+                    // reset
                     conf.reset();
                     management.reset();
+                    // save
+                    Get.find<ConfigurationController>().save().then((val) {});
+                    Get.find<CartridgeController>().save().then((val) {});
+                    // close confirm
                     Get.back();
                   },
                   textCancel: "Cancel",

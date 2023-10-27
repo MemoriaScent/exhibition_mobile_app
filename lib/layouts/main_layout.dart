@@ -25,6 +25,7 @@ class _MainLayoutState extends State<MainLayout> with WidgetsBindingObserver {
     super.initState();
     
     WidgetsBinding.instance.addObserver(this);
+    
     Get.find<ConfigurationController>().load().then((val) {});
     Get.find<CartridgeController>().load().then((val) {});
   }
