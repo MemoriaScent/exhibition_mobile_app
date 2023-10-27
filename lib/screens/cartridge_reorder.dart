@@ -16,7 +16,7 @@ class _CartridgeReorderState extends State<CartridgeReorder> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Cartridge Reorder"),
+        title: const Text("카트리지 순서 변경"),
       ),
       body: SafeArea(
         child: Container(

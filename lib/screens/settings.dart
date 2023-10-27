@@ -21,10 +21,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const TitleText(title: "Control"),
+          const TitleText(title: "기기 제어"),
           Card(
             child: SwitchListTile(
-              title: const Text("Lock user interfaces"),
+              title: const Text("사용자 인터페이스 잠금"),
               value: conf.configuration().isLocked,
               onChanged: (value) {
                 setState(() {
@@ -37,7 +37,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Card(
             child: ListTile(
               leading: const Icon(Icons.view_list),
-              title: const Text("Cartridge Management"),
+              title: const Text("카트리지 관리"),
               onTap: () {
                 Get.to(const CartridgeManagement());
               },
@@ -46,12 +46,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Card(
             child: ListTile(
               leading: const Icon(Icons.water_drop),
-              title: const Text("Set maximum number of drops"),
+              title: const Text("최대 방울 수 설정"),
               onTap: () {
                 int value = conf.configuration().maxDrops;
 
                 Get.defaultDialog(
-                  title: "Set Value",
+                  title: "설정하기",
                   content: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
                     return NumberPicker(
                       minValue: 0,
@@ -64,26 +64,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       },
                     );
                   }),
-                  textConfirm: "Confirm",
+                  textConfirm: "확인",
                   onConfirm: () {
                     conf.updateMaxDrops(value);
                     Get.back();
                   },
-                  textCancel: "Cancel",
+                  textCancel: "취소",
                 );
               },
             )
           ),
           const SizedBox(height: 20),
-          const TitleText(title: "Reset"),
+          const TitleText(title: "초기화"),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton.icon(
               onPressed: () async {
                 await Get.defaultDialog(
-                  title: "Reset",
-                  middleText: "Reset all settings",
-                  textConfirm: "Confirm",
+                  title: "초기화",
+                  middleText: "초기화 하시겠습니까?",
+                  textConfirm: "확인",
                   onConfirm: () {
                     // reset
                     conf.reset();
@@ -94,12 +94,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     // close confirm
                     Get.back();
                   },
-                  textCancel: "Cancel",
+                  textCancel: "취소",
                 );
                 setState(() {});
               },
               icon: const Icon(Icons.restart_alt),
-              label: const Text("Reset all settings"),
+              label: const Text("모든 설정 초기화"),
             ),
           ),
           SizedBox(
@@ -110,7 +110,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Get.find<CartridgeController>().save().then((val) {});
               },
               icon: const Icon(Icons.save),
-              label: const Text("Save"),
+              label: const Text("설정 저장"),
             ),
           ),
           SizedBox(
@@ -121,7 +121,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Get.find<CartridgeController>().load().then((val) {});
               },
               icon: const Icon(Icons.get_app),
-              label: const Text("Load"),
+              label: const Text("설정 불러오기"),
             ),
           ),
         ],

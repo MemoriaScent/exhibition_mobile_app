@@ -27,7 +27,7 @@ class _ControlScreenState extends State<ControlScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                management.length() == 0 ? "No Cartridges" : "Steering Mode",
+                management.length() == 0 ? "카트리지가 없습니다!" : "원하는 향을 조향해 보세요",
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -84,13 +84,13 @@ class _ControlScreenState extends State<ControlScreen> {
                   ElevatedButton.icon(
                     onPressed: () {},
                     icon: const Icon(Icons.air),
-                    label: const Text("Fan ON/OFF"),
+                    label: const Text("발향 시작"),
                   ),
                   const SizedBox(width: 20),
                   ElevatedButton.icon(
                     onPressed: () {},
                     icon: const Icon(Icons.play_arrow),
-                    label: const Text("Scent Steeting"),
+                    label: const Text("조향 시작"),
                   ),
                 ],
               )

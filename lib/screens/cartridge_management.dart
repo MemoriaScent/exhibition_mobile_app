@@ -21,7 +21,7 @@ class _CartridgeManagementState extends State<CartridgeManagement> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Cartridge Management",
+          "카트리지 관리",
         ),
         actions: [
           IconButton(
@@ -41,12 +41,13 @@ class _CartridgeManagementState extends State<CartridgeManagement> {
               children: [
                 const SizedBox(width: double.infinity),
                 const Text(
-                  "Base",
+                  "기조제",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20,
                   ),
                 ),
+                const SizedBox(height: 10),
                 for (int index = 0; index < management.length(); index++)
                 if (management.index(index).isBase)
                 CartridgeListTile(
@@ -60,26 +61,27 @@ class _CartridgeManagementState extends State<CartridgeManagement> {
                   },
                   onLongPress: () async {
                     await Get.defaultDialog(
-                      title: "Check",
-                      middleText: "Really Remove?",
-                      textConfirm: "Confirm",
+                      title: "삭제",
+                      middleText: "삭제 하시겠습니까?",
+                      textConfirm: "확인",
                       onConfirm: () {
                         management.removeCartridge(index);
                         Get.back();
                       },
-                      textCancel: "Cancel",
+                      textCancel: "취소",
                     );
                     setState(() {});
                   },
                 ),
                 const SizedBox(height: 30),
                 const Text(
-                  "Extra",
+                  "첨가제",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20,
                   ),
                 ),
+                const SizedBox(height: 10),
                 for (int index = 0; index < management.length(); index++)
                 if (!management.index(index).isBase)
                 CartridgeListTile(
@@ -93,14 +95,14 @@ class _CartridgeManagementState extends State<CartridgeManagement> {
                   },
                   onLongPress: () async {
                     await Get.defaultDialog(
-                      title: "Check",
-                      middleText: "Really Remove?",
-                      textConfirm: "Confirm",
+                      title: "삭제",
+                      middleText: "삭제 하시겠습니까?",
+                      textConfirm: "확인",
                       onConfirm: () {
                         management.removeCartridge(index);
                         Get.back();
                       },
-                      textCancel: "Cancel",
+                      textCancel: "취소",
                     );
                     setState(() {});
                   },
@@ -132,7 +134,7 @@ Future<CartridgeData?> showCartridgeDialog(CartridgeData argData) async {
   bool isConfirm = false;
 
   await Get.defaultDialog(
-    title: "Cartridge",
+    title: "카트리지",
     content: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
       return Form(
         key: formKey,
@@ -148,7 +150,7 @@ Future<CartridgeData?> showCartridgeDialog(CartridgeData argData) async {
                     });
                   },
                 ),
-                const Text("Is Base"),
+                const Text("기조제 여부"),
               ],
             ),
             const SizedBox(height: 20),
@@ -159,13 +161,13 @@ Future<CartridgeData?> showCartridgeDialog(CartridgeData argData) async {
               },
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return "Please enter something";
+                  return "내용을 입력해 주세요";
                 }
                 return null;
               },
               decoration: const InputDecoration(
-                labelText: "Name",
-                hintText: "Cartridge Name",
+                labelText: "이름",
+                hintText: "향료 이름",
                 enabledBorder: OutlineInputBorder(),
               ),
             ),
@@ -177,9 +179,9 @@ Future<CartridgeData?> showCartridgeDialog(CartridgeData argData) async {
               },
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return "Please enter something";
+                  return "내용을 입력해 주세요";
                 } else if (int.tryParse(value) == null) {
-                  return "Please enter the number";
+                  return "숫자를 입력해 주세요";
                 }
                 return null;
               },
@@ -188,8 +190,8 @@ Future<CartridgeData?> showCartridgeDialog(CartridgeData argData) async {
                 FilteringTextInputFormatter.digitsOnly,
               ],
               decoration: const InputDecoration(
-                labelText: "Min Drops",
-                hintText: "Minimum Drops",
+                labelText: "최소 방울 수",
+                hintText: "최소 방울 수",
                 enabledBorder: OutlineInputBorder(),
               ),
             ),

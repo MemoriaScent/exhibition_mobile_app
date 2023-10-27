@@ -105,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       onPressed: () {
                         conf.updateScreenIndex(1);
                       },
-                      child: const Text("Start"),
+                      child: const Text("시작하기"),
                     ),
                   ),
                 ],
