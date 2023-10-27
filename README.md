@@ -1,16 +1,3 @@
-# test_app_01
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# 전시용 디퓨저 조향 앱
+- Flutter로 개발된 2023년도 상마 페스티벌 전시용 디퓨저 조향 앱 입니다.
+- 전시용으로 개발된거라서 실제 기능이 작동되지는 않습니다.
